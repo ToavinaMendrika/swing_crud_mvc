@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.EventListener;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 public class MenuBar {
+    protected static WindowList listWin;
+    protected static WindowEdit editWin;
 	public static JMenuBar createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		
@@ -28,12 +28,24 @@ public class MenuBar {
 		itemSet.setMnemonic('E');
 		itemSet.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
 		//itemSet.setIcon(new ImageIcon("icons/open.png"));
+		itemSet.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editWin = new WindowEdit();
+                editWin.setVisible(true);
+            }
+        });
 
 		JMenuItem itemList = new JMenuItem("Lister");
 		itemList.setMnemonic('L');
 		itemList.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, KeyEvent.CTRL_DOWN_MASK));
 		//itemList.setIcon(new ImageIcon("icons/open.png"));
-
+        itemList.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                listWin = new WindowList();
+                listWin.setVisible(true);
+            }
+        });
 		
 		/* Ajout de menuFile dans menuBar et des items dans menuFile */
 		menuBar.add(menuFile);

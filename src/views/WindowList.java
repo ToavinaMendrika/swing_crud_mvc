@@ -1,8 +1,12 @@
 package views;
 
+import controller.PersonneCotroller;
+
 import java.awt.BorderLayout;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class WindowList extends JFrame{
 	private static final long serialVersionUID = 1L;
+	private PersonneCotroller pc;
 	
 	public static JTable tabInfoPerson;
 
@@ -26,10 +31,14 @@ public class WindowList extends JFrame{
 		panel1.setLayout(new BorderLayout(0, 0));
 		
 		/************ TABLE CLIENT ******************/
-		tabInfoPerson = new JTable();
+		String[] entetes = {"Prénom", "Nom", "age"};
+		pc = new PersonneCotroller();
+		String[][] persons = pc.all();
+		JTable tabInfoPerson = new JTable(persons,entetes);
+
 		tabInfoPerson.setBounds(0, 0, 80, 25);
 		panel1.add(new JScrollPane(tabInfoPerson));
-		getList();
+
 		
 		mainPanel.add(panel1);
 		
@@ -39,9 +48,10 @@ public class WindowList extends JFrame{
 		this.setLocationRelativeTo(null);
 	}
 	
-	private static void getList() {
-		DefaultTableModel listOfPerson = new	DefaultTableModel();		
-		ResultSet result = null;
+	private void getList(){
+		DefaultTableModel listOfPerson = new DefaultTableModel();
+		pc = new PersonneCotroller();
+        Object[][] persons = pc.all();
 
 	 }
 	
@@ -49,7 +59,7 @@ public class WindowList extends JFrame{
 	public static void refreshTable() {
 		DefaultTableModel model = (DefaultTableModel)tabInfoPerson.getModel();
 		model.setRowCount(0);
-		getList();
+
 	}
 	//////// ACTUALISATION DE LA TABLE --- END //////////////
 	
