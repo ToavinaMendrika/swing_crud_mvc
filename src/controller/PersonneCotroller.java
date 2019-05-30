@@ -16,14 +16,11 @@ public class PersonneCotroller {
 
     public String[][] all(){
         PersonneRepository p = new PersonneRepository();
-        //System.out.println(p.findAll());
-
         return p.findAll();
     }
 
     public String[] first(int id){
         PersonneRepository p = new PersonneRepository();
-        System.out.println(p.show(id));
         return p.show(id);
     }
 
@@ -38,5 +35,10 @@ public class PersonneCotroller {
         p.setPrenom(prenom);
         p.setAge(age);
         p.update(id);
+    }
+
+    public void delete(int id){
+        PersonneRepository p = new PersonneRepository();
+        p.delete(id);
     }
 }

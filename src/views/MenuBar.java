@@ -11,6 +11,7 @@ import javax.swing.*;
 public class MenuBar {
     protected static WindowList listWin;
     protected static WindowEdit editWin;
+    protected static WindowDel delWin;
 	public static JMenuBar createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 		
@@ -46,6 +47,17 @@ public class MenuBar {
                 listWin.setVisible(true);
             }
         });
+
+        JMenuItem itemDel = new JMenuItem("Supprimer");
+        itemDel.setMnemonic('D');
+        itemDel.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK));
+        //itemList.setIcon(new ImageIcon("icons/open.png"));
+        itemDel.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                delWin = new WindowDel();
+                delWin.setVisible(true);
+            }
+        });
 		
 		/* Ajout de menuFile dans menuBar et des items dans menuFile */
 		menuBar.add(menuFile);
@@ -54,6 +66,7 @@ public class MenuBar {
 		menuFile.add(itemSet);
 		menuFile.addSeparator();
 		menuFile.add(itemList);
+        menuFile.add(itemDel);
 		
 		return menuBar;
 	}

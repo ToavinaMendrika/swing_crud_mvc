@@ -123,13 +123,23 @@ public class PersonneRepository extends Personne {
     public void update(int id){
         try {
             String sql = "UPDATE  personnes SET nom=?, prenom=?, age=? WHERE id=?";
-
             PreparedStatement stmtInsert = con.prepareStatement(sql);
             stmtInsert.setString(1,getNom());
             stmtInsert.setString(2,getPrenom());
             stmtInsert.setInt(3,getAge());
             stmtInsert.setInt(4,id);
             stmtInsert.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id){
+        try {
+            String sql = "DELETE FROM personnes WHERE id=?";
+            PreparedStatement stmtDelete = con.prepareStatement(sql);
+            stmtDelete.setInt(1,id);
+            stmtDelete.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

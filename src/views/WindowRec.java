@@ -31,12 +31,6 @@ public class WindowRec extends JFrame{
 		
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(null);
-		
-		/******* NUMERO ********/
-		JLabel labelNum = new JLabel("Numéro");
-		labelNum.setBounds(15, 15, 100, 25);
-		panel1.add(labelNum);
-		
 
 		
 		/******* NOM ******/
@@ -73,6 +67,10 @@ public class WindowRec extends JFrame{
 			@Override
             public void actionPerformed(ActionEvent e) {
                 Pc.insert(fieldNom.getText(),fieldPrenom.getText(),Integer.parseInt(fieldAge.getText()));
+                fieldNom.setText("");
+                fieldPrenom.setText("");
+                fieldAge.setText("");
+                JOptionPane.showMessageDialog(null,"Enregistrement réussie");
             }
         });
 		panel1.add(btnEnregistrer);
